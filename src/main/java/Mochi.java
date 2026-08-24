@@ -1,10 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * Runs the Mochi chatbot.
  */
 public class Mochi {
-    private static final int MAX_TASKS = 100;
     private static final String SEPARATOR = "____________________________________________________________";
 
     /**
@@ -14,8 +14,7 @@ public class Mochi {
      */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Task[] tasks = new Task[MAX_TASKS];
-        int taskCount = 0;
+        ArrayList<Task> tasks = new ArrayList<>();
 
         System.out.println(SEPARATOR);
         System.out.println("Hello! I'm Mochi.");
@@ -33,42 +32,33 @@ public class Mochi {
             try {
                 if (input.equals("list")) {
                     System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < taskCount; i++) {
-                        System.out.println((i + 1) + "." + tasks[i]);
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println((i + 1) + "." + tasks.get(i));
                     }
                 } else if (input.equals("mark") || input.startsWith("mark ")) {
-                    int taskIndex = parseTaskIndex(input, "mark", taskCount);
-                    tasks[taskIndex].markAsDone();
+                    int taskIndex = parseTaskIndex(input, "mark", tasks.size());
+                    tasks.get(taskIndex).markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
-                    System.out.println("  " + tasks[taskIndex]);
+                    System.out.println("  " + tasks.get(taskIndex));
                 } else if (input.equals("unmark") || input.startsWith("unmark ")) {
-                    int taskIndex = parseTaskIndex(input, "unmark", taskCount);
-                    tasks[taskIndex].markAsNotDone();
+                    int taskIndex = parseTaskIndex(input, "unmark", tasks.size());
+                    tasks.get(taskIndex).markAsNotDone();
                     System.out.println("OK, I've marked this task as not done yet:");
-                    System.out.println("  " + tasks[taskIndex]);
+                    System.out.println("  " + tasks.get(taskIndex));
                 } else if (input.equals("delete") || input.startsWith("delete ")) {
-                    int taskIndex = parseTaskIndex(input, "delete", taskCount);
-                    Task removedTask = tasks[taskIndex];
-                    for (int i = taskIndex; i < taskCount - 1; i++) {
-                        tasks[i] = tasks[i + 1];
-                    }
-                    taskCount--;
-                    tasks[taskCount] = null;
+                    int taskIndex = parseTaskIndex(input, "delete", tasks.size());
+                    Task removedTask = tasks.remove(taskIndex);
                     System.out.println("Noted. I've removed this task:");
                     System.out.println("  " + removedTask);
-                    String taskWord = taskCount == 1 ? "task" : "tasks";
-                    System.out.println("Now you have " + taskCount + " " + taskWord + " in the list.");
+                    String taskWord = tasks.size() == 1 ? "task" : "tasks";
+                    System.out.println("Now you have " + tasks.size() + " " + taskWord + " in the list.");
                 } else {
                     Task task = parseTask(input);
-                    if (taskCount >= MAX_TASKS) {
-                        throw new MochiException("Your task list is full. I can store up to " + MAX_TASKS + " tasks.");
-                    }
-                    tasks[taskCount] = task;
-                    taskCount++;
+                    tasks.add(task);
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  " + task);
-                    String taskWord = taskCount == 1 ? "task" : "tasks";
-                    System.out.println("Now you have " + taskCount + " " + taskWord + " in the list.");
+                    String taskWord = tasks.size() == 1 ? "task" : "tasks";
+                    System.out.println("Now you have " + tasks.size() + " " + taskWord + " in the list.");
                 }
             } catch (MochiException e) {
                 printError(e.getMessage());
