@@ -46,6 +46,18 @@ public class Mochi {
                     tasks[taskIndex].markAsNotDone();
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println("  " + tasks[taskIndex]);
+                } else if (input.equals("delete") || input.startsWith("delete ")) {
+                    int taskIndex = parseTaskIndex(input, "delete", taskCount);
+                    Task removedTask = tasks[taskIndex];
+                    for (int i = taskIndex; i < taskCount - 1; i++) {
+                        tasks[i] = tasks[i + 1];
+                    }
+                    taskCount--;
+                    tasks[taskCount] = null;
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println("  " + removedTask);
+                    String taskWord = taskCount == 1 ? "task" : "tasks";
+                    System.out.println("Now you have " + taskCount + " " + taskWord + " in the list.");
                 } else {
                     Task task = parseTask(input);
                     if (taskCount >= MAX_TASKS) {
@@ -113,14 +125,14 @@ public class Mochi {
             return new Event(description, from, to);
         }
         throw new MochiException(
-                "I don't know that command yet. Try todo, deadline, event, list, mark, unmark, or bye.");
+                "I don't know that command yet. Try todo, deadline, event, list, mark, unmark, delete, or bye.");
     }
 
     /**
-     * Extracts and validates the one-based task number in a mark or unmark command.
+     * Extracts and validates the one-based task number in a mark, unmark, or delete command.
      *
      * @param input complete command entered by the user
-     * @param command command word, either mark or unmark
+     * @param command command word: mark, unmark, or delete
      * @param taskCount number of tasks currently stored
      * @return zero-based index of the selected task
      * @throws MochiException if the task number is missing, nonnumeric, or outside the list

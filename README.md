@@ -54,13 +54,19 @@ Prerequisites: JDK 25, update Intellij to the most recent version.
    2.[D][ ] return book (by: Sunday)
    3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
    ____________________________________________________________
+   delete 3
+   ____________________________________________________________
+   Noted. I've removed this task:
+     [E][ ] project meeting (from: Mon 2pm to: 4pm)
+   Now you have 2 tasks in the list.
+   ____________________________________________________________
    todo
    ____________________________________________________________
    Oops! A todo needs a description.
    ____________________________________________________________
    blah
    ____________________________________________________________
-   Oops! I don't know that command yet. Try todo, deadline, event, list, mark, unmark, or bye.
+   Oops! I don't know that command yet. Try todo, deadline, event, list, mark, unmark, delete, or bye.
    ____________________________________________________________
    bye
    ____________________________________________________________
@@ -72,5 +78,5 @@ Prerequisites: JDK 25, update Intellij to the most recent version.
 
 ## Acknowledgements
 
-ChatGPT in Codex mode was used to review and refine the Level-0 through Level-5 implementations and documentation,
+ChatGPT in Codex mode was used to review and refine the Level-0 through Level-6 implementations and documentation,
 including the A-Classes, A-Inheritance, and A-Exceptions refactorings.
