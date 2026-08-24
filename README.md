@@ -73,4 +73,4 @@ Prerequisites: JDK 25, update Intellij to the most recent version.
 ## Acknowledgements
 
 ChatGPT in Codex mode was used to review and refine the Level-0 through Level-5 implementations and documentation,
-including the A-Classes and A-Inheritance refactorings.
+including the A-Classes, A-Inheritance, and A-Exceptions refactorings.
