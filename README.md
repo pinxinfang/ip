@@ -19,6 +19,16 @@ Prerequisites: JDK 25, update Intellij to the most recent version.
    Hello! I'm Mochi.
    What can I do for you?
    ____________________________________________________________
+   list
+   ____________________________________________________________
+   list
+   ____________________________________________________________
+   blah
+   ____________________________________________________________
+   blah
+   ____________________________________________________________
+   bye
+   ____________________________________________________________
    Bye. Hope to see you again soon!
    ____________________________________________________________
    ```
@@ -27,4 +37,4 @@ Prerequisites: JDK 25, update Intellij to the most recent version.
 
 ## Acknowledgements
 
-ChatGPT in Codex mode was used to review and refine the Level-0 implementation and documentation.
+ChatGPT in Codex mode was used to review and refine the Level-0 and Level-1 implementations and documentation.
