@@ -49,19 +49,19 @@ public class Mochi {
                 Task task;
                 if (input.startsWith("todo ")) {
                     String description = input.substring(5);
-                    task = new Task(description, "T", "");
+                    task = new Todo(description);
                 } else if (input.startsWith("deadline ")) {
                     int byIndex = input.indexOf(" /by ");
                     String description = input.substring(9, byIndex);
                     String by = input.substring(byIndex + 5);
-                    task = new Task(description, "D", " (by: " + by + ")");
+                    task = new Deadline(description, by);
                 } else if (input.startsWith("event ")) {
                     int fromIndex = input.indexOf(" /from ");
                     int toIndex = input.indexOf(" /to ");
                     String description = input.substring(6, fromIndex);
                     String from = input.substring(fromIndex + 7, toIndex);
                     String to = input.substring(toIndex + 5);
-                    task = new Task(description, "E", " (from: " + from + " to: " + to + ")");
+                    task = new Event(description, from, to);
                 } else {
                     System.out.println("I don't understand that command yet.");
                     System.out.println(SEPARATOR);
