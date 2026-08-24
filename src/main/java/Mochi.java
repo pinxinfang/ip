@@ -46,9 +46,33 @@ public class Mochi {
                 System.out.println("OK, I've marked this task as not done yet:");
                 System.out.println("  " + tasks[taskIndex]);
             } else {
-                tasks[taskCount] = new Task(input);
+                Task task;
+                if (input.startsWith("todo ")) {
+                    String description = input.substring(5);
+                    task = new Task(description, "T", "");
+                } else if (input.startsWith("deadline ")) {
+                    int byIndex = input.indexOf(" /by ");
+                    String description = input.substring(9, byIndex);
+                    String by = input.substring(byIndex + 5);
+                    task = new Task(description, "D", " (by: " + by + ")");
+                } else if (input.startsWith("event ")) {
+                    int fromIndex = input.indexOf(" /from ");
+                    int toIndex = input.indexOf(" /to ");
+                    String description = input.substring(6, fromIndex);
+                    String from = input.substring(fromIndex + 7, toIndex);
+                    String to = input.substring(toIndex + 5);
+                    task = new Task(description, "E", " (from: " + from + " to: " + to + ")");
+                } else {
+                    System.out.println("I don't understand that command yet.");
+                    System.out.println(SEPARATOR);
+                    continue;
+                }
+                tasks[taskCount] = task;
                 taskCount++;
-                System.out.println("added: " + input);
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + task);
+                String taskWord = taskCount == 1 ? "task" : "tasks";
+                System.out.println("Now you have " + taskCount + " " + taskWord + " in the list.");
             }
             System.out.println(SEPARATOR);
         }

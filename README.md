@@ -19,29 +19,40 @@ Prerequisites: JDK 25, update Intellij to the most recent version.
    Hello! I'm Mochi.
    What can I do for you?
    ____________________________________________________________
-   read book
+   todo borrow book
    ____________________________________________________________
-   added: read book
+   Got it. I've added this task:
+     [T][ ] borrow book
+   Now you have 1 task in the list.
    ____________________________________________________________
-   return book
+   deadline return book /by Sunday
    ____________________________________________________________
-   added: return book
+   Got it. I've added this task:
+     [D][ ] return book (by: Sunday)
+   Now you have 2 tasks in the list.
    ____________________________________________________________
-   list
+   event project meeting /from Mon 2pm /to 4pm
    ____________________________________________________________
-   Here are the tasks in your list:
-   1.[ ] read book
-   2.[ ] return book
+   Got it. I've added this task:
+     [E][ ] project meeting (from: Mon 2pm to: 4pm)
+   Now you have 3 tasks in the list.
    ____________________________________________________________
    mark 2
    ____________________________________________________________
    Nice! I've marked this task as done:
-     [X] return book
+     [D][X] return book (by: Sunday)
    ____________________________________________________________
    unmark 2
    ____________________________________________________________
    OK, I've marked this task as not done yet:
-     [ ] return book
+     [D][ ] return book (by: Sunday)
+   ____________________________________________________________
+   list
+   ____________________________________________________________
+   Here are the tasks in your list:
+   1.[T][ ] borrow book
+   2.[D][ ] return book (by: Sunday)
+   3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
    ____________________________________________________________
    bye
    ____________________________________________________________
@@ -53,5 +64,5 @@ Prerequisites: JDK 25, update Intellij to the most recent version.
 
 ## Acknowledgements
 
-ChatGPT in Codex mode was used to review and refine the Level-0 through Level-3 implementations and documentation,
-including the A-Classes refactoring.
+ChatGPT in Codex mode was used to review and refine the Level-0 through Level-4 implementations and documentation,
+including the A-Classes and A-Inheritance refactorings.
