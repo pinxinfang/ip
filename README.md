@@ -29,8 +29,19 @@ Prerequisites: JDK 25, update Intellij to the most recent version.
    ____________________________________________________________
    list
    ____________________________________________________________
-   1. read book
-   2. return book
+   Here are the tasks in your list:
+   1.[ ] read book
+   2.[ ] return book
+   ____________________________________________________________
+   mark 2
+   ____________________________________________________________
+   Nice! I've marked this task as done:
+     [X] return book
+   ____________________________________________________________
+   unmark 2
+   ____________________________________________________________
+   OK, I've marked this task as not done yet:
+     [ ] return book
    ____________________________________________________________
    bye
    ____________________________________________________________
@@ -42,4 +53,5 @@ Prerequisites: JDK 25, update Intellij to the most recent version.
 
 ## Acknowledgements
 
-ChatGPT in Codex mode was used to review and refine the Level-0 through Level-2 implementations and documentation.
+ChatGPT in Codex mode was used to review and refine the Level-0 through Level-3 implementations and documentation,
+including the A-Classes refactoring.
