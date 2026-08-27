@@ -25,10 +25,10 @@ Prerequisites: JDK 25, update Intellij to the most recent version.
      [T][ ] borrow book
    Now you have 1 task in the list.
    ____________________________________________________________
-   deadline return book /by Sunday
+   deadline return book /by 2026-08-30
    ____________________________________________________________
    Got it. I've added this task:
-     [D][ ] return book (by: Sunday)
+     [D][ ] return book (by: Aug 30 2026)
    Now you have 2 tasks in the list.
    ____________________________________________________________
    event project meeting /from Mon 2pm /to 4pm
@@ -40,18 +40,18 @@ Prerequisites: JDK 25, update Intellij to the most recent version.
    mark 2
    ____________________________________________________________
    Nice! I've marked this task as done:
-     [D][X] return book (by: Sunday)
+     [D][X] return book (by: Aug 30 2026)
    ____________________________________________________________
    unmark 2
    ____________________________________________________________
    OK, I've marked this task as not done yet:
-     [D][ ] return book (by: Sunday)
+     [D][ ] return book (by: Aug 30 2026)
    ____________________________________________________________
    list
    ____________________________________________________________
    Here are the tasks in your list:
    1.[T][ ] borrow book
-   2.[D][ ] return book (by: Sunday)
+   2.[D][ ] return book (by: Aug 30 2026)
    3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
    ____________________________________________________________
    delete 3
@@ -82,5 +82,5 @@ Mochi saves task data automatically in `data/mochi.txt` and reloads it the next 
 
 ## Acknowledgements
 
-ChatGPT in Codex mode was used to review and refine the Level-0 through Level-7 implementations and documentation,
+ChatGPT in Codex mode was used to review and refine the Level-0 through Level-8 implementations and documentation,
 including the A-Classes, A-Inheritance, A-Exceptions, A-Collections, and A-Enums refactorings.

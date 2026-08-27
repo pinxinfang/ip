@@ -2,6 +2,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -140,7 +142,7 @@ public class Mochi {
                 task = new Todo(fields[2]);
                 break;
             case "D":
-                task = new Deadline(fields[2], fields[3]);
+                task = new Deadline(fields[2], LocalDate.parse(fields[3]));
                 break;
             case "E":
                 task = new Event(fields[2], fields[3], fields[4]);
@@ -154,7 +156,7 @@ public class Mochi {
                 throw new IllegalArgumentException("invalid task status");
             }
             return task;
-        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
+        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException | DateTimeParseException e) {
             throw new MochiException("Saved task data is invalid at line " + lineNumber + ".");
         }
     }
@@ -207,7 +209,11 @@ public class Mochi {
             if (by.isEmpty()) {
                 throw new MochiException("A deadline needs a date or time after '/by'.");
             }
-            return new Deadline(description, by);
+            try {
+                return new Deadline(description, LocalDate.parse(by));
+            } catch (DateTimeParseException e) {
+                throw new MochiException("Use yyyy-MM-dd for deadline dates, for example: 2026-08-30.");
+            }
         }
         if (command == Command.EVENT) {
             int fromIndex = input.indexOf("/from");
