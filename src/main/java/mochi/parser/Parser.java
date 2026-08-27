@@ -1,5 +1,14 @@
+package mochi.parser;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import mochi.command.Command;
+import mochi.exception.MochiException;
+import mochi.task.Deadline;
+import mochi.task.Event;
+import mochi.task.Task;
+import mochi.task.Todo;
 
 /**
  * Interprets user input and validates command parameters.

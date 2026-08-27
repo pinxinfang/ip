@@ -1,4 +1,14 @@
+package mochi;
+
 import java.nio.file.Path;
+
+import mochi.command.Command;
+import mochi.exception.MochiException;
+import mochi.parser.Parser;
+import mochi.storage.Storage;
+import mochi.task.Task;
+import mochi.task.TaskList;
+import mochi.ui.Ui;
 
 /**
  * Coordinates Mochi's user interface, task list, parser, and storage.

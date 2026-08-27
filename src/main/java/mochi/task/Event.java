@@ -1,3 +1,5 @@
+package mochi.task;
+
 /**
  * Represents a task occurring between specified start and end times.
  */

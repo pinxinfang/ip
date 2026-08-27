@@ -1,3 +1,5 @@
+package mochi.exception;
+
 /**
  * Represents a recoverable error caused by an invalid Mochi command.
  */
