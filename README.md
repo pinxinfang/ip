@@ -74,9 +74,13 @@ Prerequisites: JDK 25, update Intellij to the most recent version.
    ____________________________________________________________
    ```
 
+## Data storage
+
+Mochi saves task data automatically in `data/mochi.txt` and reloads it the next time the application starts.
+
 **Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
 
 ## Acknowledgements
 
-ChatGPT in Codex mode was used to review and refine the Level-0 through Level-6 implementations and documentation,
+ChatGPT in Codex mode was used to review and refine the Level-0 through Level-7 implementations and documentation,
 including the A-Classes, A-Inheritance, A-Exceptions, A-Collections, and A-Enums refactorings.

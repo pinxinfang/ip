@@ -1,10 +1,16 @@
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
  * Runs the Mochi chatbot.
  */
 public class Mochi {
+    private static final Path DATA_PATH = Path.of("data", "mochi.txt");
     private static final String SEPARATOR = "____________________________________________________________";
 
     /**
@@ -14,7 +20,13 @@ public class Mochi {
      */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> tasks;
+        try {
+            tasks = loadTasks();
+        } catch (MochiException e) {
+            printError(e.getMessage());
+            tasks = new ArrayList<>();
+        }
 
         System.out.println(SEPARATOR);
         System.out.println("Hello! I'm Mochi.");
@@ -44,18 +56,21 @@ public class Mochi {
                 case MARK:
                     int markIndex = parseTaskIndex(input, command, tasks.size());
                     tasks.get(markIndex).markAsDone();
+                    saveTasks(tasks);
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("  " + tasks.get(markIndex));
                     break;
                 case UNMARK:
                     int unmarkIndex = parseTaskIndex(input, command, tasks.size());
                     tasks.get(unmarkIndex).markAsNotDone();
+                    saveTasks(tasks);
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println("  " + tasks.get(unmarkIndex));
                     break;
                 case DELETE:
                     int deleteIndex = parseTaskIndex(input, command, tasks.size());
                     Task removedTask = tasks.remove(deleteIndex);
+                    saveTasks(tasks);
                     System.out.println("Noted. I've removed this task:");
                     System.out.println("  " + removedTask);
                     String taskWord = tasks.size() == 1 ? "task" : "tasks";
@@ -66,6 +81,7 @@ public class Mochi {
                 case EVENT:
                     Task task = parseTask(input, command);
                     tasks.add(task);
+                    saveTasks(tasks);
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  " + task);
                     String addedTaskWord = tasks.size() == 1 ? "task" : "tasks";
@@ -82,6 +98,83 @@ public class Mochi {
                 printError(e.getMessage());
             }
             System.out.println(SEPARATOR);
+        }
+    }
+
+    /**
+     * Loads saved tasks, returning an empty list when the data file does not exist yet.
+     *
+     * @return tasks restored from disk
+     * @throws MochiException if the data file cannot be read or contains invalid data
+     */
+    private static ArrayList<Task> loadTasks() throws MochiException {
+        ArrayList<Task> tasks = new ArrayList<>();
+        if (!Files.exists(DATA_PATH)) {
+            return tasks;
+        }
+        try {
+            List<String> lines = Files.readAllLines(DATA_PATH, StandardCharsets.UTF_8);
+            for (int i = 0; i < lines.size(); i++) {
+                tasks.add(parseStoredTask(lines.get(i), i + 1));
+            }
+            return tasks;
+        } catch (IOException e) {
+            throw new MochiException("I couldn't read your saved tasks: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Converts one storage line back into its task object.
+     *
+     * @param line storage line to parse
+     * @param lineNumber one-based line number used in error messages
+     * @return restored task
+     * @throws MochiException if the line is not in Mochi's storage format
+     */
+    private static Task parseStoredTask(String line, int lineNumber) throws MochiException {
+        String[] fields = line.split(" \\| ", -1);
+        try {
+            Task task;
+            switch (fields[0]) {
+            case "T":
+                task = new Todo(fields[2]);
+                break;
+            case "D":
+                task = new Deadline(fields[2], fields[3]);
+                break;
+            case "E":
+                task = new Event(fields[2], fields[3], fields[4]);
+                break;
+            default:
+                throw new IllegalArgumentException("unknown task type");
+            }
+            if (fields[1].equals("1")) {
+                task.markAsDone();
+            } else if (!fields[1].equals("0")) {
+                throw new IllegalArgumentException("invalid task status");
+            }
+            return task;
+        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
+            throw new MochiException("Saved task data is invalid at line " + lineNumber + ".");
+        }
+    }
+
+    /**
+     * Saves all tasks, creating the data directory and file when necessary.
+     *
+     * @param tasks tasks to persist
+     * @throws MochiException if the tasks cannot be written
+     */
+    private static void saveTasks(ArrayList<Task> tasks) throws MochiException {
+        ArrayList<String> lines = new ArrayList<>();
+        for (Task task : tasks) {
+            lines.add(task.toFileString());
+        }
+        try {
+            Files.createDirectories(DATA_PATH.getParent());
+            Files.write(DATA_PATH, lines, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new MochiException("I couldn't save your tasks: " + e.getMessage());
         }
     }
 

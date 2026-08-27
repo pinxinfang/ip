@@ -27,6 +27,24 @@ public class Task {
         isDone = false;
     }
 
+    /**
+     * Returns the completion status in the storage format.
+     *
+     * @return {@code 1} when done, otherwise {@code 0}
+     */
+    protected String getStorageStatus() {
+        return isDone ? "1" : "0";
+    }
+
+    /**
+     * Converts this task into a line suitable for persistent storage.
+     *
+     * @return storage representation of this task
+     */
+    public String toFileString() {
+        return getStorageStatus() + " | " + description;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
