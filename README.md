@@ -83,4 +83,4 @@ Mochi saves task data automatically in `data/mochi.txt` and reloads it the next 
 ## Acknowledgements
 
 ChatGPT in Codex mode was used to review and refine the Level-0 through Level-8 implementations and documentation,
-including the A-Classes, A-Inheritance, A-Exceptions, A-Collections, and A-Enums refactorings.
+including the A-Classes, A-Inheritance, A-Exceptions, A-Collections, A-Enums, and A-MoreOOP refactorings.
