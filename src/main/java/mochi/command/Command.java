@@ -1,3 +1,5 @@
+package mochi.command;
+
 /**
  * Identifies the commands understood by Mochi.
  */

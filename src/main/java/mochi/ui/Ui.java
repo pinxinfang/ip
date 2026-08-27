@@ -1,4 +1,9 @@
+package mochi.ui;
+
 import java.util.Scanner;
+
+import mochi.task.Task;
+import mochi.task.TaskList;
 
 /**
  * Handles console input and output for Mochi.
