@@ -81,6 +81,7 @@ Mochi saves task data automatically in `data/mochi.txt` and reloads it the next 
 ## Gradle
 
 Use `./gradlew build` to build the project and `./gradlew run` to run Mochi.
+Use `./gradlew test` to run the JUnit test suite.
 
 **Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
 
@@ -88,4 +89,4 @@ Use `./gradlew build` to build the project and `./gradlew run` to run Mochi.
 
 ChatGPT in Codex mode was used to review and refine the Level-0 through Level-8 implementations and documentation,
 including the A-Classes, A-Inheritance, A-Exceptions, A-Collections, A-Enums, A-MoreOOP, A-Packages,
-and A-Gradle refactorings.
+A-Gradle, and A-JUnit refactorings.
