@@ -20,6 +20,8 @@ import mochi.task.Todo;
  * Loads and saves Mochi tasks using a local text file.
  */
 public class Storage {
+    private static final String FIELD_SEPARATOR_PATTERN = " \\| ";
+
     private final Path filePath;
 
     /**
@@ -73,7 +75,7 @@ public class Storage {
     }
 
     private Task parseStoredTask(String line, int lineNumber) throws MochiException {
-        String[] fields = line.split(" \\| ", -1);
+        String[] fields = line.split(FIELD_SEPARATOR_PATTERN, -1);
         try {
             Task task;
             switch (fields[0]) {

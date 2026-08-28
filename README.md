@@ -90,4 +90,4 @@ The build creates the executable `build/libs/mochi.jar`, which can be run using 
 
 ChatGPT in Codex mode was used to review and refine the Level-0 through Level-8 implementations and documentation,
 including the A-Classes, A-Inheritance, A-Exceptions, A-Collections, A-Enums, A-MoreOOP, A-Packages,
-A-Gradle, A-JUnit, and A-Jar refactorings.
+A-Gradle, A-JUnit, A-Jar, and A-CodingStandard refactorings.
