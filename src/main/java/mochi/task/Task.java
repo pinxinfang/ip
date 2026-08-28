@@ -1,5 +1,7 @@
 package mochi.task;
 
+import java.util.Locale;
+
 /**
  * Represents a task with a description and completion status.
  */
@@ -27,6 +29,16 @@ public class Task {
 
     public void markAsNotDone() {
         isDone = false;
+    }
+
+    /**
+     * Checks whether this task's description contains a keyword, ignoring letter case.
+     *
+     * @param keyword text to search for
+     * @return true when the description contains the keyword
+     */
+    public boolean containsKeyword(String keyword) {
+        return description.toLowerCase(Locale.ROOT).contains(keyword.toLowerCase(Locale.ROOT));
     }
 
     /**

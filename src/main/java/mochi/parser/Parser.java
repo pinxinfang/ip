@@ -97,4 +97,19 @@ public class Parser {
         }
         return taskIndex;
     }
+
+    /**
+     * Extracts the required search keyword from a find command.
+     *
+     * @param input complete find command entered by the user
+     * @return nonempty search keyword
+     * @throws MochiException if no keyword was supplied
+     */
+    public static String parseFindKeyword(String input) throws MochiException {
+        String keyword = input.substring(Command.FIND.getKeyword().length()).trim();
+        if (keyword.isEmpty()) {
+            throw new MochiException("Tell me what to find, for example: find book");
+        }
+        return keyword;
+    }
 }

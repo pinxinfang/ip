@@ -44,4 +44,10 @@ class ParserTest {
         assertThrows(MochiException.class, () -> Parser.parseTaskIndex("mark two", Command.MARK, 3));
         assertThrows(MochiException.class, () -> Parser.parseTaskIndex("mark 4", Command.MARK, 3));
     }
+
+    @Test
+    void parseFindKeyword_presentAndMissingKeyword_behaveCorrectly() throws MochiException {
+        assertEquals("book", Parser.parseFindKeyword("find book"));
+        assertThrows(MochiException.class, () -> Parser.parseFindKeyword("find"));
+    }
 }
