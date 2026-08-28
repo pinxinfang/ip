@@ -64,6 +64,22 @@ public class TaskList implements Iterable<Task> {
         return tasks.size();
     }
 
+    /**
+     * Returns a new task list containing tasks whose descriptions match the keyword.
+     *
+     * @param keyword text to find, matched without regard to letter case
+     * @return matching tasks in their original order
+     */
+    public TaskList find(String keyword) {
+        TaskList matches = new TaskList();
+        for (Task task : tasks) {
+            if (task.containsKeyword(keyword)) {
+                matches.add(task);
+            }
+        }
+        return matches;
+    }
+
     /** {@inheritDoc} */
     @Override
     public Iterator<Task> iterator() {

@@ -69,6 +69,20 @@ public class Ui {
      */
     public void showTaskList(TaskList tasks) {
         System.out.println("Here are the tasks in your list:");
+        showTasks(tasks);
+    }
+
+    /**
+     * Displays tasks matching a find command.
+     *
+     * @param tasks matching tasks to display
+     */
+    public void showMatchingTasks(TaskList tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        showTasks(tasks);
+    }
+
+    private void showTasks(TaskList tasks) {
         int index = 1;
         for (Task task : tasks) {
             System.out.println(index + "." + task);

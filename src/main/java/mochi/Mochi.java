@@ -103,6 +103,10 @@ public class Mochi {
             storage.save(tasks);
             ui.showDeleted(removedTask, tasks.size());
             break;
+        case FIND:
+            String keyword = Parser.parseFindKeyword(input);
+            ui.showMatchingTasks(tasks.find(keyword));
+            break;
         case TODO:
         case DEADLINE:
         case EVENT:
@@ -113,7 +117,7 @@ public class Mochi {
             break;
         case UNKNOWN:
             throw new MochiException(
-                    "I don't know that command yet. Try todo, deadline, event, list, mark, unmark, delete, or bye.");
+                    "I don't know that command yet. Try todo, deadline, event, list, find, mark, unmark, delete, or bye.");
         case BYE:
             throw new MochiException("The bye command does not take extra details.");
         default:
