@@ -20,11 +20,13 @@ public class Event extends Task {
         this.to = to;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toFileString() {
         return "E | " + super.toFileString() + " | " + from + " | " + to;

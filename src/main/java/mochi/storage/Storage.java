@@ -72,6 +72,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts one line of stored data into a task.
+     *
+     * @param line line read from the data file
+     * @param lineNumber one-based line number used for error reporting
+     * @return restored task
+     * @throws MochiException if the line is malformed
+     */
     private Task parseStoredTask(String line, int lineNumber) throws MochiException {
         String[] fields = line.split(" \\| ", -1);
         try {
