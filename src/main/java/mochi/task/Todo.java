@@ -22,6 +22,6 @@ public class Todo extends Task {
     /** {@inheritDoc} */
     @Override
     public String toFileString() {
-        return "T | " + super.toFileString();
+        return "T" + STORAGE_SEPARATOR + super.toFileString();
     }
 }

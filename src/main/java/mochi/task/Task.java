@@ -4,6 +4,8 @@ package mochi.task;
  * Represents a task with a description and completion status.
  */
 public class Task {
+    protected static final String STORAGE_SEPARATOR = " | ";
+
     protected String description;
     protected boolean isDone;
 
@@ -55,7 +57,7 @@ public class Task {
      * @return storage representation of this task
      */
     public String toFileString() {
-        return getStorageStatus() + " | " + description;
+        return getStorageStatus() + STORAGE_SEPARATOR + description;
     }
 
     /** {@inheritDoc} */
