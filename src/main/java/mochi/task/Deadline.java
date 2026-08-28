@@ -24,11 +24,13 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by.format(DISPLAY_FORMAT) + ")";
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toFileString() {
         return "D | " + super.toFileString() + " | " + by;

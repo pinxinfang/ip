@@ -20,6 +20,11 @@ public enum Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Returns the text keyword that invokes this command.
+     *
+     * @return command keyword
+     */
     public String getKeyword() {
         return keyword;
     }

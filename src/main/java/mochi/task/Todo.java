@@ -13,11 +13,13 @@ public class Todo extends Task {
         super(description);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[T]" + super.toString();
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toFileString() {
         return "T | " + super.toFileString();

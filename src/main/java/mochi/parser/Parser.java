@@ -14,6 +14,12 @@ import mochi.task.Todo;
  * Interprets user input and validates command parameters.
  */
 public class Parser {
+    /**
+     * Identifies the command represented by the user's input.
+     *
+     * @param input complete input entered by the user
+     * @return parsed command type
+     */
     public static Command parseCommand(String input) {
         return Command.fromInput(input);
     }

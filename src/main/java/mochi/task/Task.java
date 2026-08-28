@@ -17,14 +17,25 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Returns the symbol used to display the completion status.
+     *
+     * @return {@code X} when done, otherwise a space
+     */
     public String getStatusIcon() {
         return isDone ? "X" : " ";
     }
 
+    /**
+     * Marks this task as completed.
+     */
     public void markAsDone() {
         isDone = true;
     }
 
+    /**
+     * Marks this task as not completed.
+     */
     public void markAsNotDone() {
         isDone = false;
     }
@@ -47,6 +58,7 @@ public class Task {
         return getStorageStatus() + " | " + description;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
