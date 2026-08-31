@@ -1,6 +1,10 @@
 package mochi;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.util.Scanner;
 
 import mochi.command.Command;
 import mochi.exception.MochiException;
@@ -17,6 +21,7 @@ public class Mochi {
     private final Storage storage;
     private final TaskList tasks;
     private final Ui ui;
+    private final ByteArrayOutputStream responseBuffer;
 
     /**
      * Creates Mochi and loads tasks from the specified data file.
@@ -24,7 +29,12 @@ public class Mochi {
      * @param filePath relative path of the task data file
      */
     public Mochi(Path filePath) {
-        this.ui = new Ui();
+        this(filePath, new Ui(), null);
+    }
+
+    private Mochi(Path filePath, Ui ui, ByteArrayOutputStream responseBuffer) {
+        this.ui = ui;
+        this.responseBuffer = responseBuffer;
         this.storage = new Storage(filePath);
         TaskList loadedTasks;
         try {
@@ -34,6 +44,20 @@ public class Mochi {
             loadedTasks = new TaskList();
         }
         this.tasks = loadedTasks;
+    }
+
+    /**
+     * Creates a Mochi instance that returns responses to a graphical interface.
+     *
+     * @param filePath relative path of the task data file
+     * @return Mochi configured for GUI interaction
+     */
+    public static Mochi forGui(Path filePath) {
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        PrintStream output = new PrintStream(buffer, true, StandardCharsets.UTF_8);
+        Mochi mochi = new Mochi(filePath, new Ui(new Scanner(""), output), buffer);
+        buffer.reset();
+        return mochi;
     }
 
     /**
@@ -66,6 +90,27 @@ public class Mochi {
             }
             ui.showLine();
         }
+    }
+
+    /**
+     * Executes one command and returns its response without console separators.
+     *
+     * @param input command entered by the user
+     * @return generated response
+     */
+    public String getResponse(String input) {
+        responseBuffer.reset();
+        Command command = Parser.parseCommand(input);
+        if (command == Command.BYE && input.equals(command.getKeyword())) {
+            ui.showGoodbye();
+        } else {
+            try {
+                executeCommand(input, command);
+            } catch (MochiException e) {
+                ui.showError(e.getMessage());
+            }
+        }
+        return responseBuffer.toString(StandardCharsets.UTF_8).stripTrailing();
     }
 
     /**

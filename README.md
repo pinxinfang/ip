@@ -80,7 +80,7 @@ Mochi saves task data automatically in `data/mochi.txt` and reloads it the next 
 
 ## Gradle
 
-Use `./gradlew build` to build the project and `./gradlew run` to run Mochi.
+Use `./gradlew build` to build the project and `./gradlew run` to open Mochi's JavaFX interface.
 Use `./gradlew test` to run the JUnit test suite and
 `./gradlew checkstyleMain checkstyleTest` to verify the Java coding standard.
 The build creates the executable `build/libs/mochi.jar`, which can be run using `java -jar mochi.jar`.
@@ -91,4 +91,4 @@ The build creates the executable `build/libs/mochi.jar`, which can be run using 
 
 ChatGPT in Codex mode was used to review and refine the Level-0 through Level-8 implementations and documentation,
 including the A-Classes, A-Inheritance, A-Exceptions, A-Collections, A-Enums, A-MoreOOP, A-Packages,
-A-Gradle, A-JUnit, A-Jar, A-JavaDoc, A-CodingStandard, Level-9, and A-CheckStyle enhancements.
+A-Gradle, A-JUnit, A-Jar, A-JavaDoc, A-CodingStandard, Level-9, A-CheckStyle, and Level-10 enhancements.
