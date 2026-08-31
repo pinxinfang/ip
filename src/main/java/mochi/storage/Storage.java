@@ -87,17 +87,17 @@ public class Storage {
         try {
             Task task;
             switch (fields[0]) {
-            case "T":
-                task = new Todo(fields[2]);
-                break;
-            case "D":
-                task = new Deadline(fields[2], LocalDate.parse(fields[3]));
-                break;
-            case "E":
-                task = new Event(fields[2], fields[3], fields[4]);
-                break;
-            default:
-                throw new IllegalArgumentException("unknown task type");
+                case "T":
+                    task = new Todo(fields[2]);
+                    break;
+                case "D":
+                    task = new Deadline(fields[2], LocalDate.parse(fields[3]));
+                    break;
+                case "E":
+                    task = new Event(fields[2], fields[3], fields[4]);
+                    break;
+                default:
+                    throw new IllegalArgumentException("unknown task type");
             }
             if (fields[1].equals("1")) {
                 task.markAsDone();
