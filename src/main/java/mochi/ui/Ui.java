@@ -55,10 +55,7 @@ public class Ui {
      * Displays Mochi's greeting.
      */
     public void showWelcome() {
-        output.println(SEPARATOR);
-        output.println("Hello! I'm Mochi.");
-        output.println("What can I do for you?");
-        output.println(SEPARATOR);
+        showLines(SEPARATOR, "Hello! I'm Mochi.", "What can I do for you?", SEPARATOR);
     }
 
     /**
@@ -109,8 +106,7 @@ public class Ui {
      * @param task task whose status changed
      */
     public void showMarked(Task task) {
-        output.println("Nice! I've marked this task as done:");
-        output.println("  " + task);
+        showLines("Nice! I've marked this task as done:", "  " + task);
     }
 
     /**
@@ -119,8 +115,7 @@ public class Ui {
      * @param task task whose status changed
      */
     public void showUnmarked(Task task) {
-        output.println("OK, I've marked this task as not done yet:");
-        output.println("  " + task);
+        showLines("OK, I've marked this task as not done yet:", "  " + task);
     }
 
     /**
@@ -130,8 +125,7 @@ public class Ui {
      * @param taskCount number of tasks remaining
      */
     public void showDeleted(Task task, int taskCount) {
-        output.println("Noted. I've removed this task:");
-        output.println("  " + task);
+        showLines("Noted. I've removed this task:", "  " + task);
         showTaskCount(taskCount);
     }
 
@@ -142,8 +136,7 @@ public class Ui {
      * @param taskCount number of tasks after addition
      */
     public void showAdded(Task task, int taskCount) {
-        output.println("Got it. I've added this task:");
-        output.println("  " + task);
+        showLines("Got it. I've added this task:", "  " + task);
         showTaskCount(taskCount);
     }
 
@@ -164,5 +157,16 @@ public class Ui {
     private void showTaskCount(int taskCount) {
         String taskWord = taskCount == 1 ? "task" : "tasks";
         output.println("Now you have " + taskCount + " " + taskWord + " in the list.");
+    }
+
+    /**
+     * Prints any number of response lines in their supplied order.
+     *
+     * @param lines response lines to print
+     */
+    private void showLines(String... lines) {
+        for (String line : lines) {
+            output.println(line);
+        }
     }
 }
