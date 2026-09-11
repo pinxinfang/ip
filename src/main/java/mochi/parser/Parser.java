@@ -37,50 +37,83 @@ public class Parser {
      * @throws MochiException if the command or any required field is invalid
      */
     public static Task parseTask(String input, Command command) throws MochiException {
-        if (command == Command.TODO) {
-            String description = getCommandDetails(input, command);
-            if (description.isEmpty()) {
-                throw new MochiException("A todo needs a description.");
-            }
-            return new Todo(description);
+        switch (command) {
+            case TODO:
+                return parseTodo(input);
+            case DEADLINE:
+                return parseDeadline(input);
+            case EVENT:
+                return parseEvent(input);
+            default:
+                throw new MochiException("That command does not create a task.");
         }
-        if (command == Command.DEADLINE) {
-            int byIndex = input.indexOf(DEADLINE_SEPARATOR);
-            if (byIndex < 0) {
-                throw new MochiException("A deadline needs '/by' followed by a date or time.");
-            }
-            String description = input.substring(command.getKeyword().length(), byIndex).trim();
-            String by = input.substring(byIndex + DEADLINE_SEPARATOR.length()).trim();
-            if (description.isEmpty()) {
-                throw new MochiException("A deadline needs a description before '/by'.");
-            }
-            if (by.isEmpty()) {
-                throw new MochiException("A deadline needs a date or time after '/by'.");
-            }
-            try {
-                return new Deadline(description, LocalDate.parse(by));
-            } catch (DateTimeParseException e) {
-                throw new MochiException("Use yyyy-MM-dd for deadline dates, for example: 2026-08-30.");
-            }
+    }
+
+    /**
+     * Parses and validates the details of a todo command.
+     *
+     * @param input complete task command
+     * @return parsed task
+     * @throws MochiException if required details are invalid
+     */
+    private static Task parseTodo(String input) throws MochiException {
+        String description = getCommandDetails(input, Command.TODO);
+        if (description.isEmpty()) {
+            throw new MochiException("A todo needs a description.");
         }
-        if (command == Command.EVENT) {
-            int fromIndex = input.indexOf(EVENT_FROM_SEPARATOR);
-            int toIndex = input.indexOf(EVENT_TO_SEPARATOR);
-            if (fromIndex < 0 || toIndex < fromIndex) {
-                throw new MochiException("An event needs both '/from' and '/to' date or time values.");
-            }
-            String description = input.substring(command.getKeyword().length(), fromIndex).trim();
-            String from = input.substring(fromIndex + EVENT_FROM_SEPARATOR.length(), toIndex).trim();
-            String to = input.substring(toIndex + EVENT_TO_SEPARATOR.length()).trim();
-            if (description.isEmpty()) {
-                throw new MochiException("An event needs a description before '/from'.");
-            }
-            if (from.isEmpty() || to.isEmpty()) {
-                throw new MochiException("An event needs values after both '/from' and '/to'.");
-            }
-            return new Event(description, from, to);
+        return new Todo(description);
+    }
+
+    /**
+     * Parses and validates the details of a deadline command.
+     *
+     * @param input complete task command
+     * @return parsed task
+     * @throws MochiException if required details are invalid
+     */
+    private static Task parseDeadline(String input) throws MochiException {
+        int byIndex = input.indexOf(DEADLINE_SEPARATOR);
+        if (byIndex < 0) {
+            throw new MochiException("A deadline needs '/by' followed by a date or time.");
         }
-        throw new MochiException("That command does not create a task.");
+        String description = input.substring(Command.DEADLINE.getKeyword().length(), byIndex).trim();
+        String by = input.substring(byIndex + DEADLINE_SEPARATOR.length()).trim();
+        if (description.isEmpty()) {
+            throw new MochiException("A deadline needs a description before '/by'.");
+        }
+        if (by.isEmpty()) {
+            throw new MochiException("A deadline needs a date or time after '/by'.");
+        }
+        try {
+            return new Deadline(description, LocalDate.parse(by));
+        } catch (DateTimeParseException e) {
+            throw new MochiException("Use yyyy-MM-dd for deadline dates, for example: 2026-08-30.");
+        }
+    }
+
+    /**
+     * Parses and validates the details of a event command.
+     *
+     * @param input complete task command
+     * @return parsed task
+     * @throws MochiException if required details are invalid
+     */
+    private static Task parseEvent(String input) throws MochiException {
+        int fromIndex = input.indexOf(EVENT_FROM_SEPARATOR);
+        int toIndex = input.indexOf(EVENT_TO_SEPARATOR);
+        if (fromIndex < 0 || toIndex < fromIndex) {
+            throw new MochiException("An event needs both '/from' and '/to' date or time values.");
+        }
+        String description = input.substring(Command.EVENT.getKeyword().length(), fromIndex).trim();
+        String from = input.substring(fromIndex + EVENT_FROM_SEPARATOR.length(), toIndex).trim();
+        String to = input.substring(toIndex + EVENT_TO_SEPARATOR.length()).trim();
+        if (description.isEmpty()) {
+            throw new MochiException("An event needs a description before '/from'.");
+        }
+        if (from.isEmpty() || to.isEmpty()) {
+            throw new MochiException("An event needs values after both '/from' and '/to'.");
+        }
+        return new Event(description, from, to);
     }
 
     private static String getCommandDetails(String input, Command command) {
