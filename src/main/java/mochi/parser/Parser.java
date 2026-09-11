@@ -130,6 +130,9 @@ public class Parser {
      * @throws MochiException if the task number is missing, nonnumeric, or outside the list
      */
     public static int parseTaskIndex(String input, Command command, int taskCount) throws MochiException {
+        assert taskCount >= 0 : "The task count must never be negative";
+        assert command == Command.MARK || command == Command.UNMARK || command == Command.DELETE
+                : "Task-index parsing requires a mark, unmark, or delete command";
         String commandWord = command.getKeyword();
         String taskNumber = input.substring(commandWord.length()).trim();
         int taskIndex;
