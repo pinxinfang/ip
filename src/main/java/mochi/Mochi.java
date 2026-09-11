@@ -130,6 +130,14 @@ public class Mochi {
                 }
                 ui.showTaskList(tasks);
                 break;
+            case SORT:
+                if (!input.equals(command.getKeyword())) {
+                    throw new MochiException("The sort command does not take extra details.");
+                }
+                tasks.sortByDescription();
+                storage.save(tasks);
+                ui.showTaskList(tasks);
+                break;
             case MARK:
                 int markIndex = Parser.parseTaskIndex(input, command, tasks.size());
                 Task markedTask = tasks.get(markIndex);
@@ -163,7 +171,7 @@ public class Mochi {
                 ui.showAdded(task, tasks.size());
                 break;
             case UNKNOWN:
-                throw new MochiException("I don't know that command yet. Try todo, deadline, event, list, find, "
+                throw new MochiException("I don't know that command yet. Try todo, deadline, event, list, sort, find, "
                         + "mark, unmark, delete, or bye.");
             case BYE:
                 throw new MochiException("The bye command does not take extra details.");

@@ -1,6 +1,7 @@
 package mochi.task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -77,6 +78,14 @@ public class TaskList implements Iterable<Task> {
         return new TaskList(tasks.stream()
                 .filter(task -> task.containsKeyword(keyword))
                 .toList());
+    }
+
+    /**
+     * Sorts tasks alphabetically by description, ignoring case.
+     * Tasks with equal descriptions retain their relative order.
+     */
+    public void sortByDescription() {
+        tasks.sort(Comparator.comparing(Task::getDescription, String.CASE_INSENSITIVE_ORDER));
     }
 
     /** {@inheritDoc} */
