@@ -22,6 +22,15 @@ public class Task {
     }
 
     /**
+     * Returns the description without status or type decorations.
+     *
+     * @return task description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
      * Returns the symbol used to display the completion status.
      *
      * @return {@code X} when done, otherwise a space
