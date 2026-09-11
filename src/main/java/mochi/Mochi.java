@@ -94,11 +94,13 @@ public class Mochi {
 
     /**
      * Executes one command and returns its response without console separators.
+     * This instance must have been created using {@link #forGui(Path)}.
      *
      * @param input command entered by the user
      * @return generated response
      */
     public String getResponse(String input) {
+        assert responseBuffer != null : "GUI responses require an instance created with forGui";
         responseBuffer.reset();
         Command command = Parser.parseCommand(input);
         if (command == Command.BYE && input.equals(command.getKeyword())) {

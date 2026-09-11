@@ -23,6 +23,8 @@ public class TaskList implements Iterable<Task> {
      * @param tasks tasks to place in the list
      */
     public TaskList(List<Task> tasks) {
+        assert tasks != null : "The initial task collection must exist";
+        assert !tasks.contains(null) : "The initial task collection must not contain null tasks";
         this.tasks = new ArrayList<>(tasks);
     }
 
@@ -32,6 +34,7 @@ public class TaskList implements Iterable<Task> {
      * @param task task to add
      */
     public void add(Task task) {
+        assert task != null : "Only non-null tasks may be added to the list";
         tasks.add(task);
     }
 
