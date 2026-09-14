@@ -4,6 +4,11 @@ Mochi is a friendly desktop task assistant for recording todos, deadlines,
 and events. It remembers tasks between launches and gives clear feedback when
 a command needs correction.
 
+![Mochi desktop interface](Ui.png)
+
+This representative interface image was created with AI assistance for the
+product showcase.
+
 ## Quick start
 
 Run `./gradlew run`, then enter commands in the chat window. Press Enter or
