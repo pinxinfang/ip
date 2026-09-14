@@ -75,7 +75,7 @@ public class Mochi {
     public void run() {
         ui.showWelcome();
         while (ui.hasNextCommand()) {
-            String input = ui.readCommand();
+            String input = ui.readCommand().trim();
             Command command = Parser.parseCommand(input);
             ui.showLine();
             if (command == Command.BYE && input.equals(command.getKeyword())) {
@@ -102,6 +102,7 @@ public class Mochi {
     public String getResponse(String input) {
         assert responseBuffer != null : "GUI responses require an instance created with forGui";
         responseBuffer.reset();
+        input = input == null ? "" : input.trim();
         Command command = Parser.parseCommand(input);
         if (command == Command.BYE && input.equals(command.getKeyword())) {
             ui.showGoodbye();

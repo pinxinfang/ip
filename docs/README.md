@@ -1,33 +1,43 @@
 # Mochi User Guide
 
-// Update the title above to match the actual product name
+Mochi is a friendly desktop task assistant for recording todos, deadlines,
+and events. It remembers tasks between launches and gives clear feedback when
+a command needs correction.
 
-// Product screenshot goes here
+## Quick start
 
-// Product intro goes here
+Run `./gradlew run`, then enter commands in the chat window. Press Enter or
+click **Send** to submit a command. **Clear** removes the conversation shown
+in the window; it does not delete saved tasks.
 
-## Adding deadlines
+## Adding tasks
 
-// Describe the action and its outcome.
+Enter `todo` followed by a description:
 
-// Give examples of usage
-
-Example: `keyword (optional arguments)`
-
-// A description of the expected outcome goes here
-
+```text
+todo read the assigned chapter
+Got it. I've added this task:
+  [T][ ] read the assigned chapter
 ```
-expected output
-```
 
-## Feature ABC
+Use `/by` for a deadline date in `yyyy-MM-dd` format:
+`deadline submit report /by 2026-09-18`
 
-// Feature details
+Use `/from` and `/to` for an event:
+`event project meeting /from Mon 2pm /to 4pm`
 
+## Managing tasks
 
-## Feature XYZ
+`list` displays all tasks. `mark 2` and `unmark 2` change task 2's status,
+while `delete 2` removes it. `find book` searches descriptions without regard
+to letter case. `sort` arranges tasks alphabetically and saves the new order.
+Use `bye` to end a command-line session.
 
-// Feature details
+## Saving tasks
+
+Mochi stores tasks in `data/mochi.txt`. The file is created automatically and
+existing tasks are loaded when Mochi starts. The application reports a
+friendly error if saved data is unreadable or malformed.
 
 ## Sorting tasks
 

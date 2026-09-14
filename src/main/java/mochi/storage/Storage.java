@@ -88,12 +88,15 @@ public class Storage {
             Task task;
             switch (fields[0]) {
                 case "T":
+                    requireFieldCount(fields, 3);
                     task = new Todo(fields[2]);
                     break;
                 case "D":
+                    requireFieldCount(fields, 4);
                     task = new Deadline(fields[2], LocalDate.parse(fields[3]));
                     break;
                 case "E":
+                    requireFieldCount(fields, 5);
                     task = new Event(fields[2], fields[3], fields[4]);
                     break;
                 default:
@@ -107,6 +110,18 @@ public class Storage {
             return task;
         } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException | DateTimeParseException e) {
             throw new MochiException("Saved task data is invalid at line " + lineNumber + ".");
+        }
+    }
+
+    /**
+     * Ensures a saved record has exactly the fields expected for its task type.
+     *
+     * @param fields fields parsed from a saved record
+     * @param expectedCount expected number of fields
+     */
+    private void requireFieldCount(String[] fields, int expectedCount) {
+        if (fields.length != expectedCount || fields[1].isBlank()) {
+            throw new IllegalArgumentException("invalid field count");
         }
     }
 }

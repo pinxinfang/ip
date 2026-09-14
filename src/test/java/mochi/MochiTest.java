@@ -48,4 +48,15 @@ class MochiTest {
         assertEquals("Oops! The sort command does not take extra details.", mochi.getResponse("sort date"));
         assertEquals(before, mochi.getResponse("list"));
     }
+
+    @Test
+    void invalidCommands_returnErrorsWithoutChangingTasks() {
+        Mochi mochi = Mochi.forGui(tempDir.resolve("data").resolve("errors.txt"));
+        mochi.getResponse("todo keep this task");
+
+        assertEquals("Oops! A todo needs a description.", mochi.getResponse("todo"));
+        assertEquals("Oops! That task number is not in your list.", mochi.getResponse("delete 2"));
+        assertEquals("Oops! The list command does not take extra details.", mochi.getResponse("list now"));
+        assertEquals("Here are the tasks in your list:\n1.[T][ ] keep this task", mochi.getResponse("list"));
+    }
 }

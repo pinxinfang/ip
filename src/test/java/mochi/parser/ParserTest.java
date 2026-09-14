@@ -50,4 +50,11 @@ class ParserTest {
         assertEquals("book", Parser.parseFindKeyword("find book"));
         assertThrows(MochiException.class, () -> Parser.parseFindKeyword("find"));
     }
+
+    @Test
+    void parseCommand_extraWhitespace_stillRecognisesCommand() {
+        assertEquals(Command.TODO, Parser.parseCommand("  todo read book"));
+        assertEquals(Command.LIST, Parser.parseCommand("list\t"));
+        assertEquals(Command.UNKNOWN, Parser.parseCommand("   "));
+    }
 }

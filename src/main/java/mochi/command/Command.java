@@ -38,8 +38,10 @@ public enum Command {
      * @return matching command, or {@link #UNKNOWN} when no command matches
      */
     public static Command fromInput(String input) {
-        int firstSpace = input.indexOf(' ');
-        String commandWord = firstSpace < 0 ? input : input.substring(0, firstSpace);
+        if (input == null || input.isBlank()) {
+            return UNKNOWN;
+        }
+        String commandWord = input.strip().split("\\s+", 2)[0];
         for (Command command : values()) {
             if (command.keyword.equals(commandWord)) {
                 return command;

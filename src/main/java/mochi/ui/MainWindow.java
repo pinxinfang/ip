@@ -30,11 +30,14 @@ public class MainWindow extends BorderPane {
         dialogContainer.heightProperty().addListener(observable -> scrollPane.setVvalue(1.0));
 
         Button sendButton = new Button("Send");
+        Button clearButton = new Button("Clear");
         sendButton.setOnAction(event -> handleUserInput());
+        clearButton.setOnAction(event -> dialogContainer.getChildren().clear());
         userInput.setOnAction(event -> handleUserInput());
         userInput.setPromptText("Enter a command...");
 
-        HBox inputBar = new HBox(8, userInput, sendButton);
+        HBox inputBar = new HBox(8, userInput, sendButton, clearButton);
+        inputBar.setStyle("-fx-background-color: #fafafa;");
         inputBar.setPadding(new Insets(10));
         HBox.setHgrow(userInput, Priority.ALWAYS);
         setCenter(scrollPane);

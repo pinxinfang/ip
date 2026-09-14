@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -47,5 +49,16 @@ class StorageTest {
         assertEquals(todo.toString(), loadedTasks.get(0).toString());
         assertEquals(deadline.toString(), loadedTasks.get(1).toString());
         assertEquals(event.toString(), loadedTasks.get(2).toString());
+    }
+
+    @Test
+    void loadMalformedRecord_reportsFriendlyError() throws Exception {
+        Path file = tempDir.resolve("tasks.txt");
+        Files.writeString(file, "T | 0 | missing | unexpected\n", StandardCharsets.UTF_8);
+
+        MochiException exception = org.junit.jupiter.api.Assertions.assertThrows(
+                MochiException.class, () -> new Storage(file).load());
+
+        assertEquals("Saved task data is invalid at line 1.", exception.getMessage());
     }
 }

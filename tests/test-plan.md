@@ -1,4 +1,20 @@
-# Sort acceptance checks
+# Mochi acceptance checks
+
+## Core workflow
+
+1. Start with an empty temporary data file and add a todo, deadline, and event.
+2. Verify `list`, `mark`, `unmark`, `delete`, `find`, and `bye` responses.
+3. Restart Mochi and verify all task details and statuses are retained.
+
+## Error handling
+
+1. Try blank input, an unknown command, missing task details, invalid dates,
+   missing event markers, invalid task numbers, and extra arguments.
+2. Verify each error is reported without terminating Mochi or changing tasks.
+3. Place malformed data in a temporary file and verify startup reports the
+   problem and starts with an empty list.
+
+## Sorting
 
 Use a temporary data directory to avoid changing personal tasks.
 
