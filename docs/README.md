@@ -6,8 +6,6 @@ a command needs correction.
 
 ![Mochi desktop interface](Ui.png)
 
-This representative interface image was created with AI assistance for the
-product showcase.
 
 ## Quick start
 
